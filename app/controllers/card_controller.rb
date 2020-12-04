@@ -1,5 +1,5 @@
 class CardController < ApplicationController
-  before_action :set_card, only: %i(show edit update)
+  before_action :set_card, only: %i(show edit update destroy)
 
   def new
     @card = Card.new
@@ -29,6 +29,11 @@ class CardController < ApplicationController
     end
   end
 
+  def destroy
+    @card.destroy
+    redirect_to :root
+  end
+  
   private
     def card_params
       params.require(:card).permit(:title, :memo, :list_id)
